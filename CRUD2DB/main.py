@@ -2,7 +2,7 @@ from fastapi import FastAPI, HTTPException, Depends, status
 from sqlalchemy.orm import Session
 from sqlalchemy import text
 import traceback
-from core.database import SessionLocal, engine
+from core.database import get_db
 from utils import *
 # from models import *
 # from typing import Annotated
@@ -10,12 +10,7 @@ from utils import *
 app = FastAPI()
 
 
-def get_db():
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
+
 
 #  way 1 to write parameterized sql query
 @app.post("/add_employee/")
